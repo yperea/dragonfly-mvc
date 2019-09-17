@@ -1,0 +1,10 @@
+# Default ignored files
+/workspace.xml
+/codeStyles/
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+/misc.xml
+/vcs.xml
+/workspace.xml
+$PRODUCT_WORKSPACE_FILE$
