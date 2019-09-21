@@ -1,6 +1,11 @@
 <?php
 namespace Dragonfly\App\Base;
 
+/**
+ * Class Router
+ *
+ * @package Dragonfly\App\Base
+ */
 class Router
 {
     private $uri;
@@ -14,8 +19,6 @@ class Router
         $this->__set("controller", $this->__get("uri"));
         $this->__set("action", $this->__get("uri"));
         $this->__set("params", $this->__get("uri"));
-        //echo URI;
-
     }
 
     public function __get($name)
@@ -25,21 +28,22 @@ class Router
 
     public function __set($name, $value)
     {
-        $hostArray = explode('/', APP_HOST);
-
         switch ($name)
         {
             case 'controller':
+                $hostArray = explode('/', APP_HOST);
                 $position = count($hostArray);
                 $this->$name = !empty($value[$position]) ? ucfirst($value[$position]) : CONTROLLER;
                 break;
 
             case 'action':
+                $hostArray = explode('/', APP_HOST);
                 $position = count($hostArray) + 1;
                 $this->$name = !empty($value[$position]) ? ucfirst($value[$position]) : ACTION;
                 break;
 
             case 'params':
+                $hostArray = explode('/', APP_HOST);
                 $position = count($hostArray) + 2;
                 $params = array();
                 $explodedParams = !empty($value[$position]) ? explode('&', $value[$position]) : array();
@@ -50,7 +54,10 @@ class Router
                 }
                 $this->$name = $params;
                 break;
+
+            default:
+                $this->$name = $value;
+                break;
         }
     }
 }
-?>

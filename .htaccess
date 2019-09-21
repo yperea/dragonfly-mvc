@@ -1,3 +1,4 @@
+Options All -Indexes
 # Rewrite URL requests
 RewriteEngine On
 

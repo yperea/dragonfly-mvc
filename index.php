@@ -13,8 +13,11 @@ $controllerFullName = \CONTROLLERS_NAMESPACE . $controllerName;
 $actionName         = $router->action;
 $params             = $router->params;
 
-require_once (CONTROLLERS_PATH . "{$controllerName}.php");
-$controller = new $controllerFullName($controllerName);
-$controller->$actionName($params);
 
-?>
+if (is_file(CONTROLLERS_PATH . "{$controllerName}.php"))
+{
+    require_once(CONTROLLERS_PATH . "{$controllerName}.php");
+    $controller = new $controllerFullName($controllerName);
+    $controller->$actionName($params);
+}
+
