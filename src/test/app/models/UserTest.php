@@ -83,24 +83,7 @@ class UserTest extends TestCase
 
     private function getJsonUsersArray()
     {
-        $user = '[
-                    {
-                        "Id":"1", 
-                        "Username":"yperea",
-                        "Email":"yperea@msn.com",
-                        "Password":"$2y$10$aRHs4qxGmHaq6JVkY3eqbuxKjOPj/XLuvmGa9Bi8wm33.UMX4hbfy",
-                        "Created":""
-                    },
-                    {
-                        "Id":"2", 
-                        "Username":"clacar",
-                        "Email":"clacar@msn.com",
-                        "Password":"$2y$10$aRHs4qxGmHaq6JVkY3eqbuxKjOPj/XLuvmGa9Bi8wm33.UMX4hbfy",
-                        "Created":""
-                    }
-                 ]';
-
-        $objUser = json_decode($user, true);
-        return $objUser;
+        $users = file_get_contents(__DIR__ . "/../../resources/users.json");
+        return json_decode($users, true);
     }
 }

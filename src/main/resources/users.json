@@ -1,0 +1,16 @@
+[
+  {
+    "Id":"1",
+    "Username":"yperea",
+    "Email":"yperea@msn.com",
+    "Password":"$2y$10$aRHs4qxGmHaq6JVkY3eqbuxKjOPj/XLuvmGa9Bi8wm33.UMX4hbfy",
+    "Created":""
+  },
+  {
+  "Id":"2",
+  "Username":"clacar",
+  "Email":"clacar@msn.com",
+  "Password":"$2y$10$aRHs4qxGmHaq6JVkY3eqbuxKjOPj/XLuvmGa9Bi8wm33.UMX4hbfy",
+  "Created":""
+  }
+]

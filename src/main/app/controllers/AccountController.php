@@ -3,6 +3,7 @@
 namespace Dragonfly\App\Controllers;
 
 use Dragonfly\App\Base\Controller;
+use Dragonfly\App\Repositories\DUserRepository;
 use Dragonfly\App\Repositories\UserRepository;
 use Dragonfly\App\Managers\UserManager;
 use Dragonfly\App\ViewModels\Login;
@@ -10,6 +11,7 @@ use Dragonfly\App\ViewModels\UserAccount;
 
 require_once (APP_PATH . BASE_PATH . 'Controller.php');
 require_once (APP_PATH . REPOSITORIES_PATH . 'UserRepository.php');
+//require_once (APP_PATH . REPOSITORIES_PATH . 'dummies/DUserRepository.php');
 require_once (APP_PATH . VIEWMODELS_PATH . 'Login.php');
 require_once (APP_PATH . VIEWMODELS_PATH . 'UserAccount.php');
 require_once (APP_PATH . MANAGERS_PATH . 'UserManager.php');
@@ -25,9 +27,9 @@ class AccountController extends Controller
 
     public function __construct()
     {
-        //parent::name(__CLASS__);
         parent::__construct(__CLASS__);
         $this->userRepository = new UserRepository();
+        //$this->userRepository = new DUserRepository();
     }
 
     /**
