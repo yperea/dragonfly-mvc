@@ -12,7 +12,7 @@ require_once (APP_PATH . MODELS_PATH . 'User.php');
 require_once (APP_PATH . CONTRACTS_PATH . 'IUserRepository.php');
 
 /**
- * Class UserRepository
+ * Class UserRepository to persist User data.
  *
  *
  * @package Dragonfly\App\Repositories
