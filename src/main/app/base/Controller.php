@@ -25,10 +25,17 @@ abstract class Controller
      * @param null $model
      * @param array $params
      * @param null $messages
+     * @param null $layoutPage
      */
-    protected function view($viewName = null, $model = null, $params = array(), $messages = null)
+    protected function view($title = null, $viewName = null, $model = null, $params = array(), $messages = null, $layoutPage = null)
     {
-        $this->view = new View($this->controllerName, $viewName, $model, $params, $messages);
+        if(!isset($layoutPage))
+        {
+            $layoutPage = "layout.php";
+
+        }
+
+        $this->view = new View($this->controllerName, $title, $viewName, $model, $params, $messages, $layoutPage);
     }
 
     /**

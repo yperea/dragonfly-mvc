@@ -44,14 +44,30 @@ class UserManager
         $password = $newUser->getPassword();
         $password2 = $newUser->getPassword2();
 
+        if(empty($email))
+        {
+            $this->messages[] = MessageFactory::createMessage("error",
+                "Enter a valid Email.");
+            return false;
+        }
+
+        if(empty($username))
+        {
+            $this->messages[] = MessageFactory::createMessage("error",
+                "Enter a valid Username.");
+            return false;
+        }
+
         if($password == $password2)
         {
             $user = $this->userRepository->getUserByEmail($email);
-            if(!isset($user))
+            if($user == null)
             {
                 $user = $this->userRepository->getUserByUsername($username);
-                if(!isset($user))
+                if($user == null)
                 {
+
+
                     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
                     $user = new Models\User();
@@ -97,6 +113,21 @@ class UserManager
         $result = false;
         $username = $userCredentials->getUsername();
         $password = $userCredentials->getPassword();
+
+        if(empty($username))
+        {
+            $this->messages[] = MessageFactory::createMessage("error",
+                "Enter a valid Username.");
+            return false;
+        }
+
+        if(empty($password))
+        {
+            $this->messages[] = MessageFactory::createMessage("error",
+                "Enter a valid Password.");
+            return false;
+        }
+
         $userAccount = $this->userRepository->getUserByUsername($username);
 
         if (isset($userAccount))

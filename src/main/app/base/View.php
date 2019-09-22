@@ -13,19 +13,24 @@ class View
 {
     protected $template;
     protected $controllerName;
+    protected $title;
     protected $viewName;
     protected $model;
     protected $params;
     protected $messages;
+    protected $layoutPage;
+    protected $viewFile;
 
 
-    public function __construct($controllerName, $viewName, $model, $params, $messages)
+    public function __construct($controllerName, $title, $viewName, $model, $params, $messages, $layoutPage)
     {
         $this->controllerName = $controllerName;
+        $this->title = $title;
         $this->viewName = $viewName;
         $this->model = $model;
         $this->params = $params;
         $this->messages = $messages;
+        $this->layoutPage = $layoutPage;
         $this->render();
     }
 
@@ -59,23 +64,30 @@ class View
         $directoryViewName = str_replace(CONTROLLERS_NAMESPACE, '', $this->controllerName);
         $directoryViewName = str_replace('Controller', '', $directoryViewName);
 
-        $filePath = VIEWS_PATH . "{$directoryViewName}/{$this->viewName}";
+        $this->viewFile = VIEWS_PATH . "{$directoryViewName}/{$this->viewName}";
+        $layoutFile = VIEWS_PATH . "shared/{$this->layoutPage}";
 
-        if (is_file($filePath))
+        if (is_file($layoutFile))
         {
-            //$model = $this->model;
-            //$params = extract($this->params);
-            ob_start();
-            require_once($filePath);
-            $template = ob_get_contents();
-            ob_end_clean();
-            return $template;
+            if (is_file($this->viewFile))
+            {
+                ob_start();
+                require_once($layoutFile);
+                $template = ob_get_contents();
+                ob_end_clean();
+                return $template;
+            }
+            else
+            {
+                throw new Exception("View file [{$this->viewFile}] not found.", 1);
+            }
         }
         else
         {
-            throw new Exception("View [{$filePath}] does not exist.", 1);
+            throw new Exception("Layout template file [{$layoutFile}] not found.", 1);
         }
     }
+
 
     /**
      * Loads messages obtained from Manager Classes.

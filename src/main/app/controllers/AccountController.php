@@ -43,7 +43,9 @@ class AccountController extends Controller
         switch ($_SERVER['REQUEST_METHOD'])
         {
             case 'GET':
-                parent::view("login.php");
+                parent::view("Login", "login.php",
+                    null, null, null,
+                    "layout-signin.php");
                 break;
 
             case 'POST':
@@ -60,7 +62,9 @@ class AccountController extends Controller
                 }
                 else
                 {
-                    parent::view("login.php", $userCredentials, null, $userManager->getMessages());
+                    parent::view("Login", "login.php",
+                        $userCredentials, null, $userManager->getMessages(),
+                        "layout-signin.php");
                 }
                 break;
 
@@ -77,7 +81,7 @@ class AccountController extends Controller
         switch ($_SERVER['REQUEST_METHOD'])
         {
             case 'GET':
-                parent::view("signup.php");
+                parent::view("Sign Up", "signup.php");
                 break;
 
             case 'POST':
@@ -95,7 +99,8 @@ class AccountController extends Controller
                 }
                 else
                 {
-                    parent::view("signup.php", $newUser, null, $userManager->getMessages());
+                    parent::view("Sign Up","signup.php",
+                        $newUser, null, $userManager->getMessages());
                 }
 
                 break;
@@ -114,5 +119,4 @@ class AccountController extends Controller
         $userManager->closeSession();
         header("location:/" . APP_HOST . "account/login");
     }
-
 }

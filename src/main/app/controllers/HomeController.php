@@ -15,7 +15,6 @@ class HomeController extends Controller
 {
     public function __construct()
     {
-        //parent::name(__CLASS__);
         parent::__construct(__CLASS__);
     }
 
@@ -24,7 +23,9 @@ class HomeController extends Controller
         switch ($_SERVER['REQUEST_METHOD'])
         {
             case 'GET':
-                parent::view("index.php");
+                parent::view("Home", "index.php",
+                    null, null, null,
+                    "layout-landing.php");
                 break;
 
             default:

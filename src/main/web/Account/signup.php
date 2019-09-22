@@ -1,21 +1,13 @@
-<?php
-$title = "DragonFly - Sign Up";
-require_once(VIEWS_PATH . "shared/header.php");
-$model = $this->model;
-?>
+<div class="container">
+    <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4" src="/<?=APP_HOST?>public/content/img/dragonfly_logo75x75.png"
+             alt="Dragonfly Logo" width="72" height="72" />
+        <h2>Sign Up</h2>
+        <p class="lead">Registration is easy.</p>
+    </div>
 
 <div class="row">
     <div class="col-md-12 order-md-1">
-        <?php if (!empty($messages)) : ?>
-            <div class="alert alert-warning" role="alert">
-                <ul>
-                    <?php foreach ($messages as $message) : ?>
-                        <li><?= $message;?></li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
-        <?php endif;?>
-
         <form class="needs-validation"
               method="post"
               action=""
@@ -29,7 +21,7 @@ $model = $this->model;
                        class="form-control"
                        id="email"
                        name="email"
-                       value="<?=isset($model)? $model->getEmail() : "";?>"
+                       value="<?=isset($this->model)? $this->model->getEmail() : "";?>"
                        required />
                 <div class="invalid-feedback" style="width: 100%;">
                     Please enter an email.
@@ -42,7 +34,7 @@ $model = $this->model;
                        class="form-control"
                        id="username"
                        name="username"
-                       value="<?=isset($model)? $model->getUsername() : "";?>"
+                       value="<?=isset($this->model)? $this->model->getUsername() : "";?>"
                        required />
                 <div class="invalid-feedback" style="width: 100%;">
                     Please enter a username.
@@ -81,7 +73,4 @@ $model = $this->model;
         </form>
     </div>
 </div>
-
-<?php
-require_once (VIEWS_PATH . "shared/footer.php");
-?>
+</div>
