@@ -18,7 +18,7 @@
                         <div class="card-body">
                             <h4 class="card-title"><?=$product->getTitle()?></h4>
                             <p class="card-text"><?=$product->getShortDescription()?></p>
-                            <a href="product?id=1" class="btn btn-primary">Shop</a>
+                            <a href="details/id=<?=$product->getId()?>" class="btn mybtn">Buy Now</a>
                         </div>
                     </div>
                 <?php endforeach;?>

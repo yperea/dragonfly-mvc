@@ -150,3 +150,126 @@ footer {
 .rt-control {
     width: 6em;
 }
+
+
+
+.myform-logo {
+    text-align: center;
+    width: 25%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.img-logo {
+    width: 100%;
+}
+
+
+.myform-title {
+    /*line-height: 30px;*/
+    text-align: center;
+    /*color: #888;*/
+
+    margin-bottom: 0;
+    font-size: 3rem;
+    font-weight: 400;
+
+}
+
+.myform-subtitle {
+    color: #FFC106;/*#FFDE75; /*#888;*/
+}
+
+
+.error_message {
+    color:#222733;
+    text-align: center;
+}
+
+/* Contenidos y Formulario*/
+.my-content {
+    padding: 100px 0 170px 0;
+}
+.my-content .mydescription {
+    margin: 20px 0 10px 0;
+}
+.my-content .mydescription p {
+    opacity: 0.8;
+}
+
+.myform-cont {
+    margin-top: 35px;
+}
+
+.myform-top {
+    overflow: hidden;
+    padding: 0 25px 15px 25px;
+
+    background-color: #222733;
+    /*background: rgba(0, 0, 0, 0.35);*/
+
+    -moz-border-radius: 10px 10px 0 0;
+    -webkit-border-radius: 10px 10px 0 0;
+    border-radius: 10px 10px 0 0;
+
+}
+
+.myform-top-left {
+    float: left;
+    width: 75%;
+    padding-top: 25px;
+    text-align: left;
+}
+.myform-top-left p {
+    opacity: 0.8;
+}
+.myform-top-right {
+    float: right;
+    width: 25%;
+    padding-top: 25px;
+    font-size: 66px;
+    text-align: right;
+    /*opacity: 0.3;*/
+}
+.myform-bottom {
+    padding: 25px 25px 30px 25px;
+
+    background-color: #222733;
+
+    /*background: rgba(0, 0, 0, 0.3);*/
+
+    -moz-border-radius: 0 0 10px 10px;
+    -webkit-border-radius: 0 0 10px 10px;
+    border-radius: 0 0 10px 10px;
+}
+.myform-bottom .mybtn {
+    width: 100%;
+}
+
+
+.mybtn {
+    height: 50px;
+    background: #48A3C6; /*#48A3C6;*/
+    border: 0;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 40px;
+    color: #fff;
+    -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;
+
+}
+.mybtn:hover, .mybtn:active {
+    opacity: 0.6;
+    color: #fff;
+}
+.mybtn:focus {
+    opacity: 0.6;
+    color: #fff;
+    background: #de615e;
+}
+
+
+
+.myprofile-logo {
+    text-align: center;
+}

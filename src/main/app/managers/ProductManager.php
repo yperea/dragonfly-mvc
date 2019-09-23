@@ -22,4 +22,9 @@ class ProductManager
     {
         return $this->productRepository->getProducts();
     }
+
+    public function getProduct($id)
+    {
+        return $this->productRepository->getProductById($id);
+    }
 }

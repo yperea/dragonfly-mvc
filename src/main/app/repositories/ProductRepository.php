@@ -31,6 +31,8 @@ class ProductRepository implements IProductRepository
         $this->product = new Product();
     }
 
+
+
     /**
      * @return array|null
      */
@@ -54,8 +56,11 @@ class ProductRepository implements IProductRepository
      * @param $id
      * @return array|null
      */
-    public function getProductById($id)
+    public function getProductById ($id)
     {
-        return $this->dbContext->getById($id);
+        $results = null;
+        $products = $this->dbContext->getById($id);
+        $results = (count($products) == 1) ? $products[0] : null;
+        return $results;
     }
 }

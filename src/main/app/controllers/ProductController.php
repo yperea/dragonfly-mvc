@@ -39,7 +39,52 @@ class ProductController extends Controller
                 break;
 
             default:
+                $productManager =  new ProductManager($this->productRepository);
+                $products = $productManager->getGallery();
+
+                parent::view("Product Collection", "gallery.php", $products);
                 break;
         }
     }
+
+    public function details($params=null)
+    {
+        switch ($_SERVER['REQUEST_METHOD'])
+        {
+            case 'GET':
+
+                $productManager = new ProductManager($this->productRepository);
+                $product = $productManager->getProduct($params['id']);
+
+                parent::view("Product Details", "details.php",
+                    $product, null, null,
+                    "layout.php");
+                break;
+
+            /*
+            case 'POST':
+                $userCredentials = new Login();
+                $userCredentials->setUsername($_POST['username']);
+                $userCredentials->setPassword($_POST['password']);
+
+                $userManager = new UserManager($this->userRepository);
+                $result = $userManager->signIn($userCredentials);
+
+                if($result)
+                {
+                    header("location:/". APP_HOST );
+                }
+                else
+                {
+                    parent::view("Login", "login.php",
+                        $userCredentials, null, $userManager->getMessages(),
+                        "layout-signin.php");
+                }
+                break;
+            */
+            default:
+                break;
+        }
+    }
+
 }
