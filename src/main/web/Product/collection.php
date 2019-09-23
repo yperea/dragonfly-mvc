@@ -1,11 +1,12 @@
 <main role="main">
 
-    <br />
-
-    <div class="container">
-        <h1 class="text-center"><?= $this->title ?></h1>
+    <div class="jumbotron p-4 p-md-5 text-white" style="background-image: url('/<?=APP_HOST?>public/content/img/avi-richards-1900x600.jpg')">
+        <div class="col-md-6 px-0">
+            <h1 class="display-3"><?= $this->title ?></h1>
+            <p class="lead my-3">Custom Made Bracelets with Exceptional Gemstones from Ancient Times, made for women who have a desire for success, ambition, strength, and motivation.</p>
+        </div>
     </div>
-
+    <br/>
     <div class="album text-muted">
         <div class="container">
             <div class="row">

@@ -27,22 +27,22 @@ class ProductController extends Controller
         $this->productRepository = new ProductRepository();
     }
 
-    public function gallery($params=null)
+    public function collection($params=null)
     {
         switch($_SERVER['REQUEST_METHOD'])
         {
             case "GET":
                 $productManager =  new ProductManager($this->productRepository);
-                $products = $productManager->getGallery();
+                $products = $productManager->getCollection();
 
-                parent::view("Product Collection", "gallery.php", $products);
+                parent::view("Latest Collection", "collection.php", $products);
                 break;
 
             default:
                 $productManager =  new ProductManager($this->productRepository);
                 $products = $productManager->getGallery();
 
-                parent::view("Product Collection", "gallery.php", $products);
+                parent::view("Product Collection", "collection.php", $products);
                 break;
         }
     }

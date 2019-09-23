@@ -8,24 +8,24 @@
 
         <div class="carousel-inner" role="listbox">
             <!-- Slide One - Set the background image for this slide in the line below -->
-            <div class="carousel-item active" style="background-image: url('style/img/index_hero.jpg')">
+            <div class="carousel-item active" style="background-image: url('/<?=APP_HOST?>public/content/img/landing/kailas-bhirange-1900x600.jpg')">
                 <div class="container">
                     <div class="carousel-caption text-left">
-                        <h1>Project Quiron.</h1>
-                        <p>Caring and Learning.</p>
-                        <p><a class="btn btn-lg btn-primary" href="account/signup" role="button">Sign up today</a></p>
+                        <h1>PREMIUM JEWELRY</h1>
+                        <p>FOR WOMEN</p>
+                        <p><a class="btn btn-lg btn-primary" href="/<?=APP_HOST?>product/collection" role="button">SHOP NOW</a></p>
                     </div>
                 </div>
             </div>
             <!-- Slide Two - Set the background image for this slide in the line below -->
-            <div class="carousel-item" style="background-image: url('style/img/hero-bg.jpg')">
+            <div class="carousel-item" style="background-image: url('/<?=APP_HOST?>public/content/img/landing/jossuha-theophile-1900x600.jpg')">
                 <div class="carousel-caption">
                     <h1>Get Involved.</h1>
                     <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
                 </div>
             </div>
             <!-- Slide Three - Set the background image for this slide in the line below -->
-            <div class="carousel-item" style="background-image: url('style/img/slide-background14.jpg')">
+            <div class="carousel-item" style="background-image: url('/<?=APP_HOST?>public/content/img/landing/franki-chamaki-1900x600.jpg')">
                 <div class="container">
                     <div class="carousel-caption text-left">
                         <h1>One more for good measure.</h1>
@@ -48,6 +48,8 @@
 </header>
 
 <!-- Testimonials -->
+
+<!--
 <section class="testimonials text-center">
     <div class="container">
         <h2 class="mb-5">Our Team</h2>
@@ -77,7 +79,7 @@
     </div>
 </section>
 
-
+-->
 <!-- Marketing messaging and featurettes
 ================================================== -->
 <!-- Wrap the rest of the page in another container to center all the content. -->
@@ -86,30 +88,31 @@
 
     <!-- START THE FEATURETTES -->
 
-    <hr class="featurette-divider">
+    <!--<hr class="featurette-divider">-->
 
     <div class="row featurette">
         <div class="col-md-7">
-            <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
+            <h2 class="featurette-heading">Beaded Bracelets. <span class="text-muted">It'll blow your mind.</span></h2>
             <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
         </div>
         <div class="col-md-5">
-            <img class="featurette-image img-fluid mx-auto"  alt="500x500" style="width: 500px; height: 500px;" src="style/img/s3.jpg" data-holder-rendered="true">
+            <img class="featurette-image img-fluid mx-auto"  alt="Beaded Bracelets Image"
+                 src="/<?=APP_HOST?>public/content/img/landing/1512512005bbImage.jpg"
+                 data-holder-rendered="true" />
         </div>
-
-
-
     </div>
 
     <hr class="featurette-divider">
 
     <div class="row featurette">
         <div class="col-md-7 order-md-2">
-            <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
+            <h2 class="featurette-heading">Beaded Necklaces. <span class="text-muted">See for yourself.</span></h2>
             <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
         </div>
         <div class="col-md-5 order-md-1">
-            <img class="featurette-image img-fluid mx-auto" alt="500x500" src="style/img/dept_4.jpg" data-holder-rendered="true" style="width: 500px; height: 500px;">
+            <img class="featurette-image img-fluid mx-auto" alt="Beaded Necklaces Image"
+                 src="/<?=APP_HOST?>public/content/img/landing/1512573896nbimage2.jpg"
+                 data-holder-rendered="true" />
         </div>
     </div>
 
@@ -117,14 +120,15 @@
 
     <div class="row featurette">
         <div class="col-md-7">
-            <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
+            <h2 class="featurette-heading">Charm Bracelets. <span class="text-muted"></span></h2>
             <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
         </div>
         <div class="col-md-5">
-            <img class="featurette-image img-fluid mx-auto" alt="500x500" src="style/img/b3.jpg" data-holder-rendered="true" style="width: 500px; height: 500px;">
+            <img class="featurette-image img-fluid mx-auto"
+                 alt="Charm Bracelets Image"
+                 src="/<?=APP_HOST?>public/content/img/landing/1512512571cbimages2.jpg"
+                 data-holder-rendered="true" />
         </div>
     </div>
-
-    <hr class="featurette-divider">
 
     <!-- /END THE FEATURETTES -->

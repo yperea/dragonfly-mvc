@@ -18,7 +18,7 @@ class ProductManager
     }
 
 
-    public function getGallery()
+    public function getCollection()
     {
         return $this->productRepository->getProducts();
     }

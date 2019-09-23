@@ -7,10 +7,10 @@
     <div class="collapse navbar-collapse" id="navbarsExample04">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/<?=APP_HOST?>product/gallery">Collection</a>
+                <a class="nav-link" href="/<?=APP_HOST?>product/collection">Collection</a>
             </li>
 
-            <?php if (isset($_SESSION['userId'])) : ?>
+            <?php if (isset($_SESSION['username'])) : ?>
                 <li class="nav-item active">
                     <a class="nav-link" href="/<?=APP_HOST?>">Home <span class="sr-only">(current)</span></a>
                 </li>
@@ -31,7 +31,7 @@
 
         <!-- Right menu navigation bar -->
         <ul class="navbar-nav justify-content-end">
-            <?php if (!isset($_SESSION['userId'])) : ?>
+            <?php if (!isset($_SESSION['username'])) : ?>
                 <li class="nav-item"><a class="nav-link" href="/<?=APP_HOST."account"?>/signup"> Sign Up</a></li>
                 <li class="nav-item"><a class="nav-link" href="/<?=APP_HOST."account"?>/login"> Login</a></li>
             <?php else : ?>
