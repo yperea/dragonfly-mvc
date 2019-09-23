@@ -42,7 +42,10 @@ class UserRepository implements IUserRepository
      */
     public function getUserById ($id)
     {
-        return $this->dbContext->getById($id);
+        $results = null;
+        $users = $this->dbContext->getById($id);
+        $results = (count($users) == 1) ? $users[0] : null;
+        return $results;
     }
 
     /**
@@ -52,7 +55,11 @@ class UserRepository implements IUserRepository
     public function getUserByUsername ($username)
     {
         $params = ["username"=> $username];
-        return $this->dbContext->getByParams($params);
+        //return $this->dbContext->getByParams($params);
+        $results = null;
+        $users = $this->dbContext->getByParams($params);
+        $results = (count($users) == 1) ? $users[0] : null;
+        return $results;
     }
 
     /**
@@ -62,8 +69,11 @@ class UserRepository implements IUserRepository
     public function getUserByEmail ($email)
     {
         $params = ["Email" => $email];
-        return $this->dbContext->getByParams($params);
-
+        //return $this->dbContext->getByParams($params);
+        $results = null;
+        $users = $this->dbContext->getByParams($params);
+        $results = (count($users) == 1) ? $users[0] : null;
+        return $results;
     }
 
     /**

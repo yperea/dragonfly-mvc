@@ -119,12 +119,14 @@ class AppDbContext
             else{
                 $results = $query->fetchAll(PDO::FETCH_ASSOC);
             }
-
+/*
             $recordCount = count($results);
+
             if ($recordCount <= 1)
             {
                 $results = ($recordCount == 1) ? $results[0] : null;
             }
+*/
         }
         catch (Exception $exception)
         {

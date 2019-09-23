@@ -14,7 +14,8 @@ class Product
     protected $Id;
     protected $SKU;
     protected $Title;
-    protected $Description;
+    protected $ShortDescription;
+    protected $LongDescription;
     protected $Cost;
     protected $Price;
     protected $Quantity;
@@ -75,17 +76,33 @@ class Product
     /**
      * @return mixed
      */
-    public function getDescription()
+    public function getShortDescription()
     {
-        return $this->Description;
+        return $this->ShortDescription;
     }
 
     /**
-     * @param mixed $Description
+     * @param mixed $ShortDescription
      */
-    public function setDescription($Description)
+    public function setShortDescription($ShortDescription)
     {
-        $this->Description = $Description;
+        $this->ShortDescription = $ShortDescription;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLongDescription()
+    {
+        return $this->LongDescription;
+    }
+
+    /**
+     * @param mixed $LongDescription
+     */
+    public function setLongDescription($LongDescription)
+    {
+        $this->LongDescription = $LongDescription;
     }
 
     /**
@@ -214,5 +231,30 @@ class Product
     public function setCreated($Created)
     {
         $this->Created = $Created;
+    }
+
+    /**
+     * Return an array with object information so it can be used
+     * by Db Context to generate automatic statements.
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        $objArray = [
+            "Id" => self::getId(),
+            "SKU"=> self::getSKU(),
+            "Title"=> self::getTitle(),
+            "ShortDescription"=> self::getShortDescription(),
+            "LongDescription"=> self::getLongDescription(),
+            "Cost"=> self::getCost(),
+            "Price"=> self::getPrice(),
+            "Quantity"=> self::getQuantity(),
+            "Image"=> self::getImage(),
+            "Weight"=> self::getWeight(),
+            "Height"=> self::getHeight(),
+            "Depth"=> self::getDepth()
+        ];
+        return $objArray;
     }
 }

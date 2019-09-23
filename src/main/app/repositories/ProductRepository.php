@@ -36,7 +36,18 @@ class ProductRepository implements IProductRepository
      */
     public function getProducts()
     {
-        return $this->dbContext->getAll();
+        $products = $this->dbContext->getAll();
+/*
+        $recordCount = count($products);
+
+        if ($recordCount <= 1)
+        {
+            $results = ($recordCount == 1) ? $products[0] : null;
+        }
+*/
+        return $products;
+
+
     }
 
     /**
