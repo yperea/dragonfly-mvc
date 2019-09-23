@@ -40,12 +40,73 @@ class ProductController extends Controller
 
             default:
                 $productManager =  new ProductManager($this->productRepository);
-                $products = $productManager->getGallery();
+                $products = $productManager->getCollection();
 
-                parent::view("Product Collection", "collection.php", $products);
+                parent::view("Latest Collection", "collection.php", $products);
                 break;
         }
     }
+
+    public function list($params=null)
+    {
+        switch($_SERVER['REQUEST_METHOD'])
+        {
+            case "GET":
+                $productManager =  new ProductManager($this->productRepository);
+                $products = $productManager->getProductsList();
+
+                parent::view("Products List", "list.php", $products);
+                break;
+
+            default:
+                $productManager =  new ProductManager($this->productRepository);
+                $products = $productManager->getProductsList();
+
+                parent::view("Products List", "list.php", $products);
+                break;
+        }
+    }
+
+    public function edit($params=null)
+    {
+        switch ($_SERVER['REQUEST_METHOD'])
+        {
+            case 'GET':
+
+                $productManager = new ProductManager($this->productRepository);
+                $product = $productManager->getProduct($params['id']);
+
+                parent::view("Edit Product", "edit.php",
+                    $product, null, null,
+                    "layout.php");
+                break;
+
+            /*
+            case 'POST':
+                $userCredentials = new Login();
+                $userCredentials->setUsername($_POST['username']);
+                $userCredentials->setPassword($_POST['password']);
+
+                $userManager = new UserManager($this->userRepository);
+                $result = $userManager->signIn($userCredentials);
+
+                if($result)
+                {
+                    header("location:/". APP_HOST );
+                }
+                else
+                {
+                    parent::view("Login", "login.php",
+                        $userCredentials, null, $userManager->getMessages(),
+                        "layout-signin.php");
+                }
+                break;
+            */
+            default:
+                break;
+        }
+    }
+
 
     public function details($params=null)
     {

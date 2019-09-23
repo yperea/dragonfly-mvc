@@ -11,19 +11,16 @@
             </li>
 
             <?php if (isset($_SESSION['username'])) : ?>
+                <!--
                 <li class="nav-item active">
-                    <a class="nav-link" href="/<?=APP_HOST?>">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/<?/*=APP_HOST*/?>">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/<?=APP_HOST?>/stats">Statistics</a>
-                </li>
-
+                -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown08" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Task Manager</a>
+                    <a class="nav-link dropdown-toggle" href="/<?=APP_HOST?>product/list"" id="dropdown08" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Product Manager</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown08">
-                        <a class="dropdown-item" href="/<?=APP_HOST?>/list">Task List</a>
-                        <a class="dropdown-item" href="/<?=APP_HOST?>/create">New Task</a>
-                        <a class="dropdown-item" href="/<?=APP_HOST?>/get">Get Task</a>
+                        <a class="dropdown-item" href="/<?=APP_HOST?>product/list">Product List</a>
+                        <a class="dropdown-item" href="/<?=APP_HOST?>product/new">New Product</a>
                     </div>
                 </li>
             <?php endif; ?>

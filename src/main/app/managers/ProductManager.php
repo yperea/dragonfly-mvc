@@ -27,4 +27,10 @@ class ProductManager
     {
         return $this->productRepository->getProductById($id);
     }
+
+    public function getProductsList()
+    {
+        return $this->productRepository->getProducts();
+    }
+
 }
