@@ -1,31 +1,12 @@
 <?php
 
-
 namespace Dragonfly\App\ViewModels;
 
 
-class UserAccount
+class LoginViewModel
 {
-    private $Email;
     private $Username;
     private $Password;
-    private $Password2;
-
-    /**
-     * @return mixed
-     */
-    public function getEmail()
-    {
-        return $this->Email;
-    }
-
-    /**
-     * @param mixed $email
-     */
-    public function setEmail($email)
-    {
-        $this->Email = $email;
-    }
 
     /**
      * @return mixed
@@ -57,22 +38,6 @@ class UserAccount
     public function setPassword($password)
     {
         $this->Password = $password;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPassword2()
-    {
-        return $this->Password2;
-    }
-
-    /**
-     * @param mixed $password2
-     */
-    public function setPassword2($password2)
-    {
-        $this->Password2 = $password2;
     }
 
 }

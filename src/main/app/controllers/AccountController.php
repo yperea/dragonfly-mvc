@@ -6,14 +6,14 @@ use Dragonfly\App\Base\Controller;
 use Dragonfly\App\Repositories\DUserRepository;
 use Dragonfly\App\Repositories\UserRepository;
 use Dragonfly\App\Managers\UserManager;
-use Dragonfly\App\ViewModels\Login;
-use Dragonfly\App\ViewModels\UserAccount;
+use Dragonfly\App\ViewModels\LoginViewModel;
+use Dragonfly\App\ViewModels\SignUpViewModel;
 
 require_once (APP_PATH . BASE_PATH . 'Controller.php');
 require_once (APP_PATH . REPOSITORIES_PATH . 'UserRepository.php');
 //require_once (APP_PATH . REPOSITORIES_PATH . 'dummies/DUserRepository.php');
-require_once (APP_PATH . VIEWMODELS_PATH . 'Login.php');
-require_once (APP_PATH . VIEWMODELS_PATH . 'UserAccount.php');
+require_once (APP_PATH . VIEWMODELS_PATH . 'LoginViewModel.php');
+require_once (APP_PATH . VIEWMODELS_PATH . 'SignUpViewModel.php');
 require_once (APP_PATH . MANAGERS_PATH . 'UserManager.php');
 
 /**
@@ -43,13 +43,13 @@ class AccountController extends Controller
         switch ($_SERVER['REQUEST_METHOD'])
         {
             case 'GET':
-                parent::view("Login", "login.php",
+                parent::view("LoginViewModel", "login.php",
                     null, null, null,
                     "layout-signin.php");
                 break;
 
             case 'POST':
-                $userCredentials = new Login();
+                $userCredentials = new LoginViewModel();
                 $userCredentials->setUsername($_POST['username']);
                 $userCredentials->setPassword($_POST['password']);
 
@@ -62,7 +62,7 @@ class AccountController extends Controller
                 }
                 else
                 {
-                    parent::view("Login", "login.php",
+                    parent::view("LoginViewModel", "login.php",
                         $userCredentials, null, $userManager->getMessages(),
                         "layout-signin.php");
                 }
@@ -85,7 +85,7 @@ class AccountController extends Controller
                 break;
 
             case 'POST':
-                $newUser = new UserAccount();
+                $newUser = new SignUpViewModel();
                 $newUser->setEmail($_POST['email']);
                 $newUser->setUsername($_POST['username']);
                 $newUser->setPassword($_POST['password']);
