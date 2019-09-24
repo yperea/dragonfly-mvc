@@ -57,13 +57,6 @@
                 </tbody>
             </table>
 
-            <?php
-            //Generate naviational page links if we have more than one page
-        /*    if ($numPages > 1) {
-                echo getPagination($userSearch, $sort, $curPage, $numPages);
-            }*/
-            ?>
-
         </div><!-- /Responsive table -->
     </div><!-- /container -->
 </main><!-- /main -->

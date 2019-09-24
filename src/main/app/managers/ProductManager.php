@@ -16,6 +16,10 @@ class ProductManager
     protected $productRepository;
     protected $messages;
 
+    /**
+     * ProductManager constructor.
+     * @param IProductRepository $productRepository
+     */
     public function __construct(IProductRepository $productRepository)
     {
         $this->productRepository = $productRepository;
@@ -23,21 +27,35 @@ class ProductManager
     }
 
 
+    /**
+     * @return mixed
+     */
     public function getCollection()
     {
         return $this->productRepository->getProducts();
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function getProduct($id)
     {
         return $this->productRepository->getProductById($id);
     }
 
+    /**
+     * @return mixed
+     */
     public function getProductsList()
     {
         return $this->productRepository->getProducts();
     }
 
+    /**
+     * @param $productView
+     * @return bool
+     */
     public function saveProduct($productView)
     {
         $result = false;

@@ -15,11 +15,18 @@ class CategoryManager
         $this->categoryRepository = $categoryRepository;
     }
 
+    /**
+     * @return mixed
+     */
     public function getCategories()
     {
         return $this->categoryRepository->getCategories();
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function getCategory($id)
     {
         return $this->categoryRepository->getCategoryById($id);

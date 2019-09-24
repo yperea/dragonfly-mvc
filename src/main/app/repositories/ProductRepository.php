@@ -12,7 +12,6 @@ use Dragonfly\App\Repositories\Contracts\IProductRepository;
 require_once (APP_PATH . DATA_PATH . 'AppDbContext.php');
 require_once (APP_PATH . MODELS_PATH . 'Product.php');
 require_once (APP_PATH . CONTRACTS_PATH . 'IProductRepository.php');
-
 require_once (APP_PATH . REPOSITORIES_PATH . 'CategoryRepository.php');
 /**
  * Class ProductRepository to persist Product data.

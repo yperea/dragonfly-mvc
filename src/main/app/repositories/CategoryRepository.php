@@ -9,7 +9,6 @@ use Dragonfly\App\Repositories\Contracts\ICategoryRepository;
 
 
 require_once (APP_PATH . DATA_PATH . 'AppDbContext.php');
-//require_once (APP_PATH . MODELS_PATH . 'Product.php');
 require_once (APP_PATH . CONTRACTS_PATH . 'ICategoryRepository.php');
 
 class CategoryRepository implements ICategoryRepository
