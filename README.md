@@ -5,9 +5,16 @@ Inspired by my wife's work, Dragonfly is a website where she can post and sell h
 
 ### Project Technologies/Techniques
 * Security/Authentication
-    * Admin role: create/read/update/delete products.
-    * Registered User role: create/read/update (cru) their own profiles. Search, buy and review products.
+    * Admin role: create/read/update/delete products. (WIP)
+    * Registered User role: create/read/update (cru) their own profiles. Search, buy and review products.(WIP)
     * Public: anyone can navigate throughout public pages (no login)
+* Architectural patterns:
+    * MVC
+    * MVVM
+* Design patterns:
+    * Singleton
+    * Repository
+    * Factory
 * Database
     * MySQL
     * PDO
@@ -20,20 +27,18 @@ Inspired by my wife's work, Dragonfly is a website where she can post and sell h
     * AWS CodePipeline
     * AWS CodeDeploy
 * CSS
-    * Bootstrap 3.7
+    * Bootstrap 4
 * Data Validation
     * Bootstrap Validator for front end
-* Logging
-    * TBD.
+* Logging (WIP)
+
 * Hosting
-    * [AWS](http://TBD/)
+    * [AWS](http://18.221.8.250/dragonfly-mvc/)
 * Unit Testing
-    * PHPUnit tests to achieve 80%+ code coverage
+    * PHPUnit tests to achieve 80%+ code coverage (WIP)
 * IDE: IntelliJ IDEA
 
 ### Supporting Materials
-* [Screen Design](docs/design/Screens.md)
-* [Database Design](db/erd/ERDProjectQuiron.png)
-* [Application Demo](https://youtu.be/5yRyZphWTOc)
-* [Application Website](http://TBD/)
+* [Database Design](docs/dragonfly-erd.png)
+* [Application Website](http://18.221.8.250/dragonfly-mvc/)
 
