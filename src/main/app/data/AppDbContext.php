@@ -93,6 +93,30 @@ class AppDbContext
 
     }
 
+    /**
+     * @param $entityMap
+     * @return int|string
+     */
+    public function update($entityMap)
+    {
+        $setClause = $this->getSetValues($entityMap);
+
+        $idValue = $this->getIdValue($entityMap);
+
+        $sql  = "UPDATE {$this->table} ";
+        $sql .= "SET {$setClause} ";
+        $sql .= "WHERE Id = :Id";
+
+        $queryParams = $this->getQueryParams($entityMap);
+        $results = $this->executeCommand($sql, $queryParams);
+
+        if($results != -1)
+        {
+            $results = $idValue;
+        }
+        return $results;
+    }
+
 
     /**
      * @param $sql
@@ -119,14 +143,6 @@ class AppDbContext
             else{
                 $results = $query->fetchAll(PDO::FETCH_ASSOC);
             }
-/*
-            $recordCount = count($results);
-
-            if ($recordCount <= 1)
-            {
-                $results = ($recordCount == 1) ? $results[0] : null;
-            }
-*/
         }
         catch (Exception $exception)
         {
@@ -143,7 +159,6 @@ class AppDbContext
      */
     private function executeCommand($sql, $commandParameters = array())
     {
-        $results = 0;
         try
         {
             $query = $this->prepareStatement($sql, $commandParameters);
@@ -154,6 +169,7 @@ class AppDbContext
         catch (Exception $exception)
         {
             $this->messages[] = $exception->getMessage();
+            $results = -1;
         }
         return $results;
     }
@@ -232,5 +248,32 @@ class AppDbContext
             $fields[] = ":$key";
         }
         return implode(",", $fields);
+    }
+
+    /**
+     * @param $entityMap
+     * @return string
+     */
+    private function getSetValues ($entityMap)
+    {
+        $fields = array();
+        foreach ($entityMap as $key => $value)
+        {
+            if(strtolower($key) != "id" ) {
+                $fields[$key] = "$key = :$key";
+            }
+        }
+        return implode(",", $fields);
+    }
+
+    private function getIdValue ($entityMap)
+    {
+        foreach ($entityMap as $key => $value)
+        {
+            if(strtolower($key) == "id" ) {
+                return $value;
+            }
+        }
+        return null;
     }
 }

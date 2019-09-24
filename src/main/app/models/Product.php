@@ -23,6 +23,8 @@ class Product
     protected $Weight;
     protected $Height;
     protected $Depth;
+    protected $CategoryId;
+    protected $Category;
     protected $Created;
 
     /**
@@ -220,6 +222,39 @@ class Product
     /**
      * @return mixed
      */
+    public function getCategoryId()
+    {
+        return $this->CategoryId;
+    }
+
+    /**
+     * @param mixed $CategoryId
+     */
+    public function setCategoryId($CategoryId): void
+    {
+        $this->CategoryId = $CategoryId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategory()
+    {
+        return $this->Category;
+    }
+
+    /**
+     * @param mixed $Category
+     */
+    public function setCategory($Category): void
+    {
+        $this->Category = $Category;
+    }
+
+
+    /**
+     * @return mixed
+     */
     public function getCreated()
     {
         return $this->Created;
@@ -253,7 +288,8 @@ class Product
             "Image"=> self::getImage(),
             "Weight"=> self::getWeight(),
             "Height"=> self::getHeight(),
-            "Depth"=> self::getDepth()
+            "Depth"=> self::getDepth(),
+            "CategoryId"=> self::getCategoryId()
         ];
         return $objArray;
     }

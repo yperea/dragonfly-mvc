@@ -18,6 +18,9 @@ class HomeController extends Controller
         parent::__construct(__CLASS__);
     }
 
+    /**
+     * @param null $params
+     */
     public function index($params = null)
     {
         switch ($_SERVER['REQUEST_METHOD'])

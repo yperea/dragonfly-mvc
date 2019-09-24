@@ -17,7 +17,7 @@
                 </li>
                 -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="/<?=APP_HOST?>product/list"" id="dropdown08" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Product Manager</a>
+                    <a class="nav-link dropdown-toggle" href="/<?=APP_HOST?>product/list" id="dropdown08" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Product Manager</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown08">
                         <a class="dropdown-item" href="/<?=APP_HOST?>product/list">Product List</a>
                         <a class="dropdown-item" href="/<?=APP_HOST?>product/new">New Product</a>

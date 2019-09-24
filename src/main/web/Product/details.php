@@ -15,11 +15,11 @@
 <main role="main" class="container">
     <div class="row">
         <div class="col-sm-3">
-            <div>
-                <img src="<?= isset($product) ?
+            <div class="text-center">
+                <img src="<?= !empty($product->getImage()) ?
                          "/" . APP_HOST . "public/content/img/products/" . $product->getImage() :
-                         "/" . APP_HOST . "public/content/img/no-product.png)"; ?>"
-                     class="rounded float-left img-thumbnail img-fluid"
+                         "/" . APP_HOST . "public/content/img/noimage.gif"; ?>"
+                     class="rounded img-thumbnail img-fluid"
                      alt="<?=$product->getTitle();?> Image">
             </div>
             <div>
@@ -28,10 +28,9 @@
         </div>
         <div class="col-sm-6">
             <div class="blog-post">in
-                <h3 class="blog-post-title"><?="productCategory"?></h3>
+                <h3 class="blog-post-title"><?=$product->getCategory()->getName()?></h3>
                 <p class="blog-post-meta">
-                    <a href="productreviews.php?productid=<?=$product->getId()?>"><?='0'?>
-                        customer reviews</a> <?=' out of 5 stars)'?>
+                    <a href="#"> 0 customer reviews</a>
                 </p>
                 <hr />
                 <h4>Price: $<?=$product->getPrice();?></h4>
@@ -49,7 +48,7 @@
                 <div class="myform-bottom">
                     <?= $this->displayMessages() ?>
                     <?php if (1==1) : ?>
-                        <form role="form" method="POST" action="/<?=APP_HOST?>product/gallery">
+                        <form role="form" method="post" action="#">
                             <input type="hidden" name="productId" value="<?= $product->getId(); ?>" />
                             <div class="form-row">
                                 <div class="col-md-12 mb-3">
@@ -63,7 +62,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <button type="submit" name="submit" class="mybtn">Add to Cart</button>
+                            <button type="button" name="submit" class="mybtn">Add to Cart</button>
                         </form>
                     <?php endif; ?>
                 </div>

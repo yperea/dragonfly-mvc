@@ -20,4 +20,12 @@ define('MANAGERS_PATH', '/../../../main/app/managers/');
 define('HELPERS_PATH', '/../../../main/app/helpers/');
 define('VIEWS_PATH', $_SERVER['DOCUMENT_ROOT'] . '/dragonfly-mvc/src/main/web/');
 define('SERVICE_URL', 'http://localhost/dragonfly-mvc/services/taskservice.php'); //LOCAL -> Change before deploying
+
+define('UPLOAD_PATH', 'img/');
+define('PRD_UPLOAD_PATH', 'img/products/');
+define('CUS_UPLOAD_PATH', 'img/customers/');
+
+define('MAX_FILE_SIZE', 5000000);      // 500 KB
+define('MAX_IMG_WIDTH', 3000);        // 3000 pixels
+define('MAX_IMG_HEIGHT', 3000);       // 3000 pixels
 ?>
