@@ -1,0 +1,327 @@
+#!/usr/bin/env bash
+
+set -e
+
+mysql -udfdbuser -pdfdbuser -D dragonflydb <<EOF
+
+DROP DATABASE IF EXISTS dragonflydb;
+CREATE DATABASE dragonflydb;
+USE dragonflydb;
+
+-- MySQL dump 10.13  Distrib 5.7.27, for Linux (x86_64)
+--
+-- Host: 127.0.0.1    Database: dragonflydb
+-- ------------------------------------------------------
+-- Server version	5.7.27-0ubuntu0.18.04.1
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table ADDRESSES
+--
+
+DROP TABLE IF EXISTS ADDRESSES;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE ADDRESSES (
+  Id int(11) NOT NULL AUTO_INCREMENT,
+  FirstName varchar(45) NOT NULL,
+  MiddleName varchar(45) DEFAULT NULL,
+  LastName varchar(45) NOT NULL,
+  Address1 varchar(255) NOT NULL,
+  Address2 varchar(255) DEFAULT NULL,
+  City varchar(45) NOT NULL,
+  State varchar(45) NOT NULL,
+  Zip varchar(45) NOT NULL,
+  Phone varchar(45) NOT NULL,
+  Picture varchar(255) DEFAULT NULL,
+  Created datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (Id)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table ADDRESSES
+--
+
+/*!40000 ALTER TABLE ADDRESSES DISABLE KEYS */;
+/*!40000 ALTER TABLE ADDRESSES ENABLE KEYS */;
+
+--
+-- Table structure for table CATEGORIES
+--
+
+DROP TABLE IF EXISTS CATEGORIES;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE CATEGORIES (
+  Id int(11) NOT NULL AUTO_INCREMENT,
+  Name varchar(45) NOT NULL,
+  Description varchar(512) DEFAULT NULL,
+  Image varchar(255) DEFAULT NULL,
+  ParentId varchar(45) DEFAULT NULL,
+  Created datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (Id)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table CATEGORIES
+--
+
+/*!40000 ALTER TABLE CATEGORIES DISABLE KEYS */;
+INSERT INTO CATEGORIES (Id, Name, Description, Image, ParentId, Created) VALUES (1,'Beaded Bracelets','Vitae semper quis lectus nulla. Vulputate eu scelerisque felis imperdiet. Eget lorem dolor sed viverra ipsum nunc aliquet bibendum enim. Porttitor massa id neque aliquam vestibulum morbi blandit cursus risus.',NULL,NULL,'2019-09-22 18:07:45');
+INSERT INTO CATEGORIES (Id, Name, Description, Image, ParentId, Created) VALUES (2,'Beaded Necklaces','Id aliquet risus feugiat in ante. Imperdiet sed euismod nisi porta lorem mollis. Sagittis vitae et leo duis ut. Morbi tincidunt ornare massa eget egestas purus. Senectus et netus et malesuada fames. Natoque penatibus et magnis dis parturient montes nascetur.',NULL,NULL,'2019-09-22 18:08:30');
+/*!40000 ALTER TABLE CATEGORIES ENABLE KEYS */;
+
+--
+-- Table structure for table ORDERS
+--
+
+DROP TABLE IF EXISTS ORDERS;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE ORDERS (
+  Id int(11) NOT NULL AUTO_INCREMENT,
+  UserId int(11) DEFAULT NULL,
+  AddressId int(11) DEFAULT NULL,
+  State char(1) NOT NULL DEFAULT 'A' COMMENT 'A=Active, P=Pending, C=Complete',
+  TotalAmount decimal(13,2) NOT NULL DEFAULT '0.00',
+  Created datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  Shipped datetime DEFAULT NULL,
+  PRIMARY KEY (Id),
+  KEY fk_ORDERS_USERS_ADDRESSES1_idx (UserId,AddressId),
+  CONSTRAINT fk_ORDERS_USERS_ADDRESSES1 FOREIGN KEY (UserId, AddressId) REFERENCES USERS_ADDRESSES (UserId, AddressId) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table ORDERS
+--
+
+/*!40000 ALTER TABLE ORDERS DISABLE KEYS */;
+/*!40000 ALTER TABLE ORDERS ENABLE KEYS */;
+
+--
+-- Table structure for table ORDER_ITEMS
+--
+
+DROP TABLE IF EXISTS ORDER_ITEMS;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE ORDER_ITEMS (
+  Id int(11) NOT NULL AUTO_INCREMENT,
+  OrderId int(11) NOT NULL,
+  ProductId int(11) NOT NULL,
+  UnitPrice decimal(13,2) NOT NULL DEFAULT '0.00',
+  Quantity int(11) NOT NULL DEFAULT '1',
+  Created datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (Id),
+  KEY fk_ORDER_ITEMS_ORDERS1_idx (OrderId),
+  KEY fk_ORDER_ITEMS_PRODUCTS1_idx (ProductId),
+  CONSTRAINT fk_ORDER_ITEMS_ORDERS1 FOREIGN KEY (OrderId) REFERENCES ORDERS (Id) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT fk_ORDER_ITEMS_PRODUCTS1 FOREIGN KEY (ProductId) REFERENCES PRODUCTS (Id) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table ORDER_ITEMS
+--
+
+/*!40000 ALTER TABLE ORDER_ITEMS DISABLE KEYS */;
+/*!40000 ALTER TABLE ORDER_ITEMS ENABLE KEYS */;
+
+--
+-- Table structure for table PRODUCTS
+--
+
+DROP TABLE IF EXISTS PRODUCTS;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE PRODUCTS (
+  Id int(11) NOT NULL AUTO_INCREMENT,
+  SKU varchar(45) DEFAULT NULL,
+  Title varchar(255) NOT NULL,
+  ShortDescription varchar(255) DEFAULT NULL,
+  LongDescription varchar(4000) DEFAULT NULL,
+  Cost decimal(13,2) DEFAULT '0.00',
+  Price decimal(13,2) DEFAULT '0.00',
+  Quantity int(11) DEFAULT '0',
+  Image varchar(255) DEFAULT NULL,
+  Weight decimal(13,2) DEFAULT '0.00',
+  Width decimal(13,2) DEFAULT '0.00',
+  Height decimal(13,2) DEFAULT '0.00',
+  Depth decimal(13,2) DEFAULT '0.00',
+  CategoryId int(11) DEFAULT NULL,
+  Created datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (Id),
+  KEY fk_PRODUCTS_CATEGORIES1_idx (CategoryId),
+  CONSTRAINT fk_PRODUCTS_CATEGORIES1 FOREIGN KEY (CategoryId) REFERENCES CATEGORIES (Id) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table PRODUCTS
+--
+
+/*!40000 ALTER TABLE PRODUCTS DISABLE KEYS */;
+INSERT INTO PRODUCTS (Id, SKU, Title, ShortDescription, LongDescription, Cost, Price, Quantity, Image, Weight, Width, Height, Depth, CategoryId, Created) VALUES (1,'BB001','African Turquoise Bracelet','Handmade Bracelet with 8mm African Turquoise Jasper gemstone beads complemented with 8mm Basalt Lava Rock beads and an Antique Gold Aum Pendant.','Handmade Bracelet with 8mm African Turquoise Jasper gemstone beads complemented with 8mm Basalt Lava Rock beads and an Antique Gold Aum Pendant! SIZES: 6 inches - Extra Small 6.5 inches - Small 7 inches - Average 7.5 inches - Large 8 inches - Extra Large ï¿½Stone Propertiesï¿½ **African Turquoise Jasper** The ï¿½Stone of Evolutionï¿½, brings encouragement for growth, development and positive change within life itself. African turquoise opens the mind to new ideas, new possibilities and new existence. It is a stone that brings structure, balance and prosperity where it is due. African Turquoise is a stone that hands over a key to new life with its offerings. This is a stone that awakens the soul to its intended purpose, encouraging the being to make positive impression while gaining and giving positive wisdom. Especially good being kept safely around babies and the young to encourage healthy growth and development overall. It is a type of jasper found in Africa and is often dyed to achieve a turquoise-like color. Enhancing its role as a turquoise substitute is its matrix, which also resembles turquoise matrix.',50.00,65.00,2,'br_001.jpg',1.00,5.00,1.00,5.00,2,'2019-09-22 18:16:46');
+INSERT INTO PRODUCTS (Id, SKU, Title, ShortDescription, LongDescription, Cost, Price, Quantity, Image, Weight, Width, Height, Depth, CategoryId, Created) VALUES (2,'BB002','Aqua','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sit amet diam nec lorem rutrum suscipit et in neque. Sed eget dapibus nisi. Nulla ex justo, pharetra vel iaculis in, iaculis elementum urna. Duis eleifend eget mauris vitae aliquet.','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sit amet diam nec lorem rutrum suscipit et in neque. Sed eget dapibus nisi. Nulla ex justo, pharetra vel iaculis in, iaculis elementum urna. Duis eleifend eget mauris vitae aliquet. Sed vitae quam euismod, molestie enim vitae, scelerisque nulla. Mauris molestie ac urna in luctus. Maecenas dapibus egestas dapibus. Mauris efficitur, leo at condimentum pretium, lorem justo posuere orci, eget varius metus libero vel purus. Sed tellus purus, pharetra laoreet tempus placerat, cursus ac nibh. Sed turpis lorem, euismod quis gravida vitae, rhoncus vel ex. Donec cursus pulvinar odio, quis cursus felis sagittis nec. Morbi ac molestie ex. Pellentesque luctus tempus dapibus. Aliquam turpis sem, maximus eget enim a, semper porta tellus.',30.00,40.00,2,'br_002.jpg',1.00,5.00,1.00,5.00,1,'2019-09-22 19:10:52');
+INSERT INTO PRODUCTS (Id, SKU, Title, ShortDescription, LongDescription, Cost, Price, Quantity, Image, Weight, Width, Height, Depth, CategoryId, Created) VALUES (3,'BB003','Bolt Angel Bracelet','Vestibulum mattis interdum lacus ac luctus. Cras laoreet pellentesque velit, nec vehicula metus tristique ac. Quisque nec sem non purus viverra eleifend id vel magna.','Vestibulum mattis interdum lacus ac luctus. Cras laoreet pellentesque velit, nec vehicula metus tristique ac. Quisque nec sem non purus viverra eleifend id vel magna. Curabitur nec cursus felis, id interdum urna. Suspendisse ut laoreet diam. Nam elementum eros nec tincidunt aliquet. Vestibulum malesuada lacus at mauris ornare, nec congue nisi bibendum. Nulla accumsan, magna vitae ultrices cursus, nisi magna blandit est, eget efficitur est erat vel est.',40.00,50.00,1,'br_003.jpg',1.00,5.00,1.00,5.00,1,'2019-09-22 19:13:43');
+INSERT INTO PRODUCTS (Id, SKU, Title, ShortDescription, LongDescription, Cost, Price, Quantity, Image, Weight, Width, Height, Depth, CategoryId, Created) VALUES (4,'BB004','Christmas Trutle','Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed ipsum neque','Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed ipsum neque, accumsan in mollis non, interdum nec metus. Curabitur ut euismod lacus. Nullam pretium nisi vitae orci faucibus euismod. Duis in ultrices elit. Sed dictum rhoncus lacus, eget aliquam sapien tempor nec. Suspendisse enim nunc, elementum ut tellus sit amet, consectetur viverra justo. Sed hendrerit velit quis dapibus mattis. Cras eu lorem elit. Praesent sem tellus, convallis ut ultrices ut, luctus sed lectus. Quisque pellentesque interdum lacus eu convallis. Proin diam lorem, pellentesque ut nisl nec, tempus condimentum odio.',50.00,65.00,1,'br_004.jpg',1.00,5.00,1.00,5.00,1,'2019-09-22 19:15:43');
+INSERT INTO PRODUCTS (Id, SKU, Title, ShortDescription, LongDescription, Cost, Price, Quantity, Image, Weight, Width, Height, Depth, CategoryId, Created) VALUES (5,'BB005','Dharma Valley','Phasellus euismod tincidunt leo id scelerisque. Praesent eu justo sagittis, dapibus tortor in, vestibulum ligula. Nunc maximus, nunc vel consequat iaculis, arcu neque consectetur nibh, molestie posuere augue arcu vel leo.','Phasellus euismod tincidunt leo id scelerisque. Praesent eu justo sagittis, dapibus tortor in, vestibulum ligula. Nunc maximus, nunc vel consequat iaculis, arcu neque consectetur nibh, molestie posuere augue arcu vel leo. Nam sagittis orci est, sit amet venenatis felis vestibulum quis. Donec porta ac libero quis tempor. Nunc venenatis erat faucibus dolor cursus, vitae varius ligula euismod. Nulla auctor pulvinar aliquam. Cras ut nisi aliquam, malesuada purus quis, rhoncus nisl. Sed id eros semper, suscipit nisl gravida, mollis orci. Etiam ac dui venenatis, tincidunt lacus in, ultrices urna. Ut iaculis dolor tortor.',20.00,30.00,5,'br_005.jpg',1.00,5.00,1.00,5.00,1,'2019-09-22 19:17:30');
+INSERT INTO PRODUCTS (Id, SKU, Title, ShortDescription, LongDescription, Cost, Price, Quantity, Image, Weight, Width, Height, Depth, CategoryId, Created) VALUES (6,'BB006','Festival Bracelet','Aenean scelerisque a nisl eget egestas. Sed eu urna porttitor, egestas massa ac, rutrum velit. Donec a tempus tellus. Donec magna nisi, luctus vitae semper et, consequat eget arcu. Nunc ac hendrerit nunc.','Aenean scelerisque a nisl eget egestas. Sed eu urna porttitor',45.00,50.00,5,'1569345988_br_016.jpg',1.00,5.00,1.00,5.00,2,'2019-09-22 19:20:03');
+/*!40000 ALTER TABLE PRODUCTS ENABLE KEYS */;
+
+--
+-- Table structure for table REVIEWS
+--
+
+DROP TABLE IF EXISTS REVIEWS;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE REVIEWS (
+  Id int(11) NOT NULL AUTO_INCREMENT,
+  UserId int(11) NOT NULL,
+  ProductId int(11) NOT NULL,
+  Rating tinyint(1) NOT NULL DEFAULT '0',
+  Title varchar(45) DEFAULT NULL,
+  Description varchar(512) DEFAULT NULL,
+  Created datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (Id),
+  KEY fk_REVIEWS_USERS1_idx (UserId),
+  KEY fk_REVIEWS_PRODUCTS1_idx (ProductId),
+  CONSTRAINT fk_REVIEWS_PRODUCTS1 FOREIGN KEY (ProductId) REFERENCES PRODUCTS (Id) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT fk_REVIEWS_USERS1 FOREIGN KEY (UserId) REFERENCES USERS (Id) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table REVIEWS
+--
+
+/*!40000 ALTER TABLE REVIEWS DISABLE KEYS */;
+/*!40000 ALTER TABLE REVIEWS ENABLE KEYS */;
+
+--
+-- Table structure for table ROLES
+--
+
+DROP TABLE IF EXISTS ROLES;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE ROLES (
+  Id int(11) NOT NULL AUTO_INCREMENT,
+  Name varchar(45) DEFAULT NULL,
+  Created datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (Id)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table ROLES
+--
+
+/*!40000 ALTER TABLE ROLES DISABLE KEYS */;
+/*!40000 ALTER TABLE ROLES ENABLE KEYS */;
+
+--
+-- Table structure for table USERS
+--
+
+DROP TABLE IF EXISTS USERS;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE USERS (
+  Id int(11) NOT NULL AUTO_INCREMENT,
+  Username varchar(64) NOT NULL,
+  Email varchar(64) DEFAULT NULL,
+  Password varchar(255) DEFAULT NULL,
+  Created datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (Id),
+  UNIQUE KEY user_name_UNIQUE (Username),
+  UNIQUE KEY email_UNIQUE (Email)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table USERS
+--
+
+/*!40000 ALTER TABLE USERS DISABLE KEYS */;
+INSERT INTO USERS (Id, Username, Email, Password, Created) VALUES (1,'admin','admin@msn.com','$2y$10$zQojO5nD.MBYY1jYoITxT.4vvh6Tjh/dtd9arZt6Q5rehhjYu72KC','2019-09-23 20:44:53');
+INSERT INTO USERS (Id, Username, Email, Password, Created) VALUES (2,'yperea','yperea@msn.com','$2y$10$aRHs4qxGmHaq6JVkY3eqbuxKjOPj/XLuvmGa9Bi8wm33.UMX4hbfy','2019-09-23 20:44:59');
+/*!40000 ALTER TABLE USERS ENABLE KEYS */;
+
+--
+-- Table structure for table USERS_ADDRESSES
+--
+
+DROP TABLE IF EXISTS USERS_ADDRESSES;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE USERS_ADDRESSES (
+  UserId int(11) NOT NULL,
+  AddressId int(11) NOT NULL,
+  PRIMARY KEY (UserId,AddressId),
+  KEY fk_USERS_has_ADDRESSES_ADDRESSES1_idx (AddressId),
+  KEY fk_USERS_has_ADDRESSES_USERS1_idx (UserId),
+  CONSTRAINT fk_USERS_has_ADDRESSES_ADDRESSES1 FOREIGN KEY (AddressId) REFERENCES ADDRESSES (Id) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT fk_USERS_has_ADDRESSES_USERS1 FOREIGN KEY (UserId) REFERENCES USERS (Id) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table USERS_ADDRESSES
+--
+
+/*!40000 ALTER TABLE USERS_ADDRESSES DISABLE KEYS */;
+/*!40000 ALTER TABLE USERS_ADDRESSES ENABLE KEYS */;
+
+--
+-- Table structure for table USERS_ROLES
+--
+
+DROP TABLE IF EXISTS USERS_ROLES;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE USERS_ROLES (
+  UserId int(11) NOT NULL,
+  RoleId int(11) NOT NULL,
+  PRIMARY KEY (UserId,RoleId),
+  KEY fk_USERS_has_ROLES_ROLES1_idx (RoleId),
+  KEY fk_USERS_has_ROLES_USERS_idx (UserId),
+  CONSTRAINT fk_USERS_has_ROLES_ROLES1 FOREIGN KEY (RoleId) REFERENCES ROLES (Id) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT fk_USERS_has_ROLES_USERS FOREIGN KEY (UserId) REFERENCES USERS (Id) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table USERS_ROLES
+--
+
+/*!40000 ALTER TABLE USERS_ROLES DISABLE KEYS */;
+/*!40000 ALTER TABLE USERS_ROLES ENABLE KEYS */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2019-09-24 13:42:43
+
+
+EOF
